@@ -1,4 +1,5 @@
-pragma solidity 0.6.4;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet{
     // accept any incoming amount
@@ -8,6 +9,6 @@ contract Faucet{
         // limit withdrawal amount
         require(withdraw_amount <= 100000000000000000);
         // send the amount to the address that requested it
-        msg.sender.transfer(withdraw_amount);
+        payable(msg.sender).transfer(withdraw_amount);
     }
 }
