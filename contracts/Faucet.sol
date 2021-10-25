@@ -2,6 +2,13 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet{
+
+    address payable owner;
+
+    constructor() public {
+        owner = msg.sender;
+    }
+
     // accept any incoming amount
     receive() external payable {}  
     
@@ -10,5 +17,10 @@ contract Faucet{
         require(withdraw_amount <= 100000000000000000);
         // send the amount to the address that requested it
         payable(msg.sender).transfer(withdraw_amount);
+    }
+
+    function destroy() public {
+        require(msg.sender == owner);
+        selfdestruct(owner);
     }
 }
