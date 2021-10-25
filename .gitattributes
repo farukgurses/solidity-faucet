@@ -1,0 +1,3 @@
+*.sol linguist-language=Solidity
+*.js linguist-detectable=false
+*.js linguist-vendored=false
