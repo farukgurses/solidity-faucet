@@ -9,6 +9,11 @@ contract Faucet{
         owner = msg.sender;
     }
 
+    modifier onlyOwner{
+        require(msg.sender == owner);
+        _;
+    }
+
     // accept any incoming amount
     receive() external payable {}  
     
@@ -19,8 +24,7 @@ contract Faucet{
         payable(msg.sender).transfer(withdraw_amount);
     }
 
-    function destroy() public {
-        require(msg.sender == owner);
+    function destroy() public onlyOwner{
         selfdestruct(owner);
     }
 }
