@@ -28,6 +28,10 @@ contract Faucet is Mortal{
     function withdraw(uint withdraw_amount) public {
         // limit withdrawal amount
         require(withdraw_amount <= 0.1 ether);
+        require(
+            address(this).balance >= withdraw_amount,
+            "Insufficient balance in faucet for withdrawal request"
+        );
         // send the amount to the address that requested it
         payable(msg.sender).transfer(withdraw_amount);
     }
